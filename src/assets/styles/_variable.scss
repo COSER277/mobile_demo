@@ -1,0 +1,23 @@
+/*
+    全局变量文件
+*/
+
+/* 主题颜色 */
+$main-color: #f3f5f9;
+$placeholder-color: rgba(197, 197, 197, 1);
+/* 底部下边框 border颜色 */
+$border-bottom-color: #f3f5f9;
+/* 底部下边框 border颜色 */
+$border-top-color: #f3f5f9;
+/* 底部下边框 border颜色 */
+$border-left-color: #f3f5f9;
+/* 底部下边框 border颜色 */
+$border-right-color: #f3f5f9;
+/* 白色 */
+$white: #ffffff;
+/* 有关钱数字颜色 */
+$money-color: rgba(255, 65, 51, 1);
+
+/*其他变量 头部高度*/
+$header-height: 40px;
+$test: env(safe-area-inset-bottom, 20px);

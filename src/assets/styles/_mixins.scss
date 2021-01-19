@@ -1,0 +1,33 @@
+/*
+    混合器
+*/
+
+/* X轴居中 */
+@mixin flex-x-center {
+	display: flex;
+	justify-content: center;
+}
+
+/* Y轴居中 */
+@mixin flex-y-center {
+	display: flex;
+	align-items: center;
+}
+
+/* XY居中 */
+@mixin flex-all-center {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
+/* 均分空间flex */
+@mixin flex-space-between {
+	display: flex;
+	justify-content: space-between;
+}
+/* 1像素 */
+@mixin onePx {
+	height: 1px;
+	background: $border-bottom-color;
+	transform: scaleY(0.5);
+}

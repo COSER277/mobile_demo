@@ -1,0 +1,16 @@
+/*
+全局样式主文件
+ 或 
+可在vue.config.js
+// css: {
+    //     loaderOptions: {
+    //       scss: {
+    //         // 配置全局的公共样式
+    //         prependData: `@import "~@/assets/styles/_variable.scss"; @import "~@/assets/styles/_mixins.scss";`
+    //       }
+    //     }
+// },
+**/
+@import '~@/assets/styles/_variable.scss';
+@import '~@/assets/styles/_mixins.scss';
+@import '~@/assets/styles/common.scss';
