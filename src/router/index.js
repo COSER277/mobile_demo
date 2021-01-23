@@ -1,7 +1,9 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
 import Home from '../views/Home.vue'
-
+import {
+  Dialog
+} from 'vant'
 
 //重写 vue-router push 
 //处理 "Navigating to current location (XXX) is not allowed"的问题"
@@ -11,7 +13,6 @@ VueRouter.prototype.push = function push(location) {
 }
 
 Vue.use(VueRouter)
-
 const routes = [{
     path: '/',
     // name: 'Home',
@@ -20,25 +21,30 @@ const routes = [{
       title: '首页',
       keepAlive: true
     },
-    children:[
-      { path: '/', redirect: '/report', hidden: true },
+    children: [
       {
-        path: '/report',
-        name: 'Report',
-        component: () => import('@/views/Report/index.vue')
+        path: '/',
+        redirect: '/article',
+        hidden: true
+      },
+      {
+        path: '/book',
+        name: 'Book',
+        component: () => import('@/views/Book/index.vue')
       },
       {
         path: '/article',
         name: 'ArticleList',
         component: () => import('@/views/Article/list.vue')
       },
+      {
+        path: '/user',
+        name: 'User',
+        component: () => import('@/views/User.vue')
+      },
     ]
   },
-  {
-    path: '/about',
-    name: 'About',
-    component: () => import('@/views/About.vue')
-  },
+ 
   {
     path: '/login',
     name: 'Login',
@@ -49,7 +55,11 @@ const routes = [{
     name: '404',
     component: () => import('@/views/404.vue'),
   },
-  { path: '*', redirect: '/404', hidden: true }
+  {
+    path: '*',
+    redirect: '/404',
+    hidden: true
+  }
 ]
 
 const router = new VueRouter({
@@ -75,85 +85,88 @@ import {
 } from '@/utils/common.js'
 //路由权限控制
 const history = window.sessionStorage
-history.clear()
+// history.clear()
 history.setItem('/', 0)
 
 
-router.beforeEach(async (to, from, next) => {
-  const hasToken = _getToken(USER_TOKEN)
+// router.beforeEach(async (to, from, next) => {
+//   const hasToken = _getToken(USER_TOKEN)
+//   console.log("是否有user_token", hasToken);
+//   //1 判断是否有token
+//   if (hasToken) {
+//     console.log("有token且待验证");
+//     //清除当前记录To_Url
+//     localStorage.removeItem("To_Url")
+//     //获取用户信息 
+//     const hasUserInfo =
+//       Storage.getters.userInfo && Storage.getters.userInfo.userId
+//     //有用户信息且有userId 证明登录成功过了
+//     if (hasUserInfo) {
+//       console.log("有token且有User数据");
+//       next()
+//     } else {
+//       //验证
+//       try {
+//         //请求接口方法了，使用vuex dispatch的方法 间接请求接口验证
+//         console.log("有token且无User数据，验证token数据...");
+//         await Storage.dispatch("VaildToken")
+//         console.log("有token且无User数据，验证token成功...");
+//         next()
+//       } catch (error) {
+//         localStorage.setItem("To_Url", to.fullPath)
+//         console.log("有token且无User数据，验证token失败...");
+//         //清除
+//         await history.clear()
+//         //
+//         if (Storage.getters.device == "weChat") {
+//           //微信
+//           next({
+//             path: `/wxlogin`,
+//             replace: true,
+//           })
+//         } else {
+//           //网页
+//           next({
+//             path: `/login?redirect=${to.path}`,
+//             replace: true,
+//           })
+//         }
+//       }
+//     }
+//     // next()
+//   }
+//   //有 则
+//   else {
+//     //无
+//     //判断是否在白名单中
+//     console.log("未登录");
+//     const isWhite = whiteList.findIndex(item => {
+//       return to.path.includes(item)
+//     })
 
-  //1 判断是否有token
-  if (hasToken) {
-      console.log("无token");
-    //清除当前记录To_Url
-    localStorage.removeItem("To_Url")
-    //获取用户信息 
-    const hasUserInfo =
-      Storage.getters.userInfo && Storage.getters.userInfo.userId
-    //有用户信息且有userId 证明登录成功过了
-    if (hasUserInfo) {
-      next()
-    } else {
-      //验证
-      try {
-        //请求接口方法了，使用vuex dispatch的方法 间接请求接口验证
-        await Storage.dispatch("VaildToken")
-        next()
-      } catch (error) {
-        localStorage.setItem("To_Url", to.fullPath)
-        //清除
-        await history.clear()
-        //
-        if (Storage.getters.device == "weChat") {
-          //微信
-          next({
-            path: `/wxlogin`,
-            replace: true,
-          })
-        } else {
-          //网页
-          next({
-            path: `/login?redirect=${to.path}`,
-            replace: true,
-          })
-        }
-      }
-    }
-    next()
-  }
-  //有 则
-  else {
-    //无
-    //判断是否在白名单中
-    console.log("未登录");
-    const isWhite = whiteList.findIndex(item => {
-      return to.path.includes(item)
-    })
-  
-    if (isWhite!==-1) {
-      //是 在白名单中 不需要登录
-      console.log("未登录且在白名单中",to.fullPath);
-
-      next()
-    } else {
-      console.log("未登录且不在白名单",to.fullPath);
-      //否 不在 则需要跳转登录 记录当前url
-      localStorage.setItem("To_Url", to.fullPath)
-      if (Storage.getters.device == "weChat") {
-        //微信
-        next({
-          path: `/login?redirect=${to.path}`,
-          replace: true,
-        })
-      } else {
-        //网页
-        next({
-          path: `/login?redirect=${to.path}`,
-          replace: true,
-        })
-      }
-    }
-  }
-})
+//     if (isWhite !== -1) {
+//       //是 在白名单中 不需要登录
+//       console.log("未登录且在白名单中", to.fullPath);
+//       next()
+//     } else {
+//       console.log("未登录且不在白名单", to.fullPath);
+//       //否 不在 则需要跳转登录 记录当前url
+//       localStorage.setItem("To_Url", to.fullPath)
+//       if (Storage.getters.device == "weChat") {
+//         //微信
+//         next({
+//           path: `/login?redirect=${to.path}`,
+//           replace: true,
+//         })
+//       } else {
+//         console.log("未登录且不在白名单,浏览器类型", Storage.getters.device);
+//         next({
+//           path: `/login?redirect=${to.path}`,
+//           replace: true,
+//         })
+//       }
+//     }
+//   }
+// })
 
 export default router

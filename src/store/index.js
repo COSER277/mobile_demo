@@ -34,6 +34,10 @@ Vue.use(Vuex);
                 name,
                 value
             })
+        },
+        VaildToken(){
+            console.log("Vuex验证...");
+
         }
     }
 });

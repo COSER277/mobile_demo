@@ -1,4 +1,5 @@
 import Vue from 'vue'
+import 'vant/lib/index.css';
 import {
   Toast,
   List,
@@ -13,7 +14,10 @@ import {
   Sticky,
   Swipe,
   SwipeItem,
-  CountDown
+  CountDown,
+  Tabbar, TabbarItem ,
+  Empty ,
+  Icon  ,
 } from 'vant' // 按需引入vant样式
 Vue.use(Toast)
   .use(List)
@@ -29,3 +33,7 @@ Vue.use(Toast)
   .use(Swipe)
   .use(SwipeItem)
   .use(CountDown)
+  .use(Tabbar)
+  .use(TabbarItem)
+  .use(Empty)
+  .use(Icon)

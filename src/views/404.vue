@@ -1,6 +1,6 @@
 <template>
-    <div>
-        <h1>404</h1>
+    <div class="content">
+        <van-empty image="error" description="404" />
     </div>
 </template>
 
@@ -11,5 +11,11 @@
 </script>
 
 <style lang="scss" scoped>
-
+.content{
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
 </style>
