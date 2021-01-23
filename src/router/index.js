@@ -14,12 +14,25 @@ Vue.use(VueRouter)
 
 const routes = [{
     path: '/',
-    name: 'Home',
+    // name: 'Home',
     component: Home,
     meta: {
       title: '首页',
       keepAlive: true
-    }
+    },
+    children:[
+      { path: '/', redirect: '/report', hidden: true },
+      {
+        path: '/report',
+        name: 'Report',
+        component: () => import('@/views/Report/index.vue')
+      },
+      {
+        path: '/article',
+        name: 'ArticleList',
+        component: () => import('@/views/Article/list.vue')
+      },
+    ]
   },
   {
     path: '/about',
