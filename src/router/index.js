@@ -40,12 +40,16 @@ const router = new VueRouter({
 
 import {
   USER_TOKEN
-} from "@/utils/constant"
+} from "@/config/constant"
+const whiteList = [
+  "/login",
+  "/wxlogin",
+  "/404",
+]
+import store from '@/store/index'
 import {
-  WhiteList
-} from "@/config/whiteList";
-import store
-from '@/store/index'
+  _getToken
+} from '@/utils/common.js'
 //路由权限控制
 const history = window.sessionStorage
 history.clear()
@@ -96,7 +100,8 @@ router.beforeEach(async (to, from, next) => {
   else {
     //无
     //判断是否在白名单中
-    const isWhite = WhiteList.findIndex(item => {
+    // console.log(whiteList);
+    const isWhite = whiteList.findIndex(item => {
       return to.path.includes(item)
     })
     if (isWhite) {

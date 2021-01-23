@@ -1,4 +1,4 @@
-export default{
+module.exports={
     SET_OPENID:"set_Openid",
     OPENID:"openid",
     SET_USERINFO:"set_user",

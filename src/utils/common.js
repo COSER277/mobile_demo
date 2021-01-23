@@ -24,3 +24,8 @@ export function judgeDevice() {
     }
 
 }
+
+
+export function _getToken() {
+    return sessionStorage.getItem('USER_TOKEN')
+}

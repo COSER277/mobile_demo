@@ -1,7 +1,7 @@
 import Vue from 'vue'
 import App from './App.vue'
 import './registerServiceWorker'
-import I18n from './i18n'
+// import I18n from './i18n'
 import router from './router'
 import store from './store'
 import './config/vant-config' //vant UI库配置

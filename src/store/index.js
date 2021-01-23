@@ -13,7 +13,7 @@ Vue.use(Vuex);
         userInfo: UserInfo,
     },
     mutations: {
-        ...UserInfo,
+        ...UserInfo.mutations,
         changeState(state, {
             name,
             value
@@ -22,7 +22,7 @@ Vue.use(Vuex);
         }
     },
     actions: {
-        ...UserInfo,
+        ...UserInfo.actions,
         changeState(context, {
             name,
             value

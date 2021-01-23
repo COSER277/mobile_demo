@@ -19,15 +19,15 @@ module.exports = {
             errors: true
         }, 
           //跨域代理
-        proxy: {
-            [process.env.VUE_APP_BASE_API]: {
-                target: `http://0.0.0.0:8090`, // api地址
-                changeOrigin: true,
-                pathRewrite: {
-                    ['^' + process.env.VUE_APP_BASE_API]: ''
-                }
-            }
-        },
+        // proxy: {
+        //     [process.env.VUE_APP_BASE_API]: {
+        //         target: `http://0.0.0.0:8090`, // api地址
+        //         changeOrigin: true,
+        //         pathRewrite: {
+        //             ['^' + process.env.VUE_APP_BASE_API]: ''
+        //         }
+        //     }
+        // },
        
     },
   
