@@ -39,7 +39,17 @@ const routes = [{
     name: 'About',
     component: () => import('@/views/About.vue')
   },
-  // { path: '*', redirect: '/404', hidden: true }
+  {
+    path: '/login',
+    name: 'Login',
+    component: () => import('@/views/Login.vue'),
+  },
+  {
+    path: '/404',
+    name: '404',
+    component: () => import('@/views/404.vue'),
+  },
+  { path: '*', redirect: '/404', hidden: true }
 ]
 
 const router = new VueRouter({
@@ -59,7 +69,7 @@ const whiteList = [
   "/wxlogin",
   "/404",
 ]
-import store from '@/store/index'
+import Storage from '@/store/index'
 import {
   _getToken
 } from '@/utils/common.js'
@@ -71,13 +81,15 @@ history.setItem('/', 0)
 
 router.beforeEach(async (to, from, next) => {
   const hasToken = _getToken(USER_TOKEN)
+
   //1 判断是否有token
   if (hasToken) {
+      console.log("无token");
     //清除当前记录To_Url
     localStorage.removeItem("To_Url")
     //获取用户信息 
     const hasUserInfo =
-      store.getters.userInfo && store.getters.userInfo.userId
+      Storage.getters.userInfo && Storage.getters.userInfo.userId
     //有用户信息且有userId 证明登录成功过了
     if (hasUserInfo) {
       next()
@@ -85,12 +97,12 @@ router.beforeEach(async (to, from, next) => {
       //验证
       try {
         //请求接口方法了，使用vuex dispatch的方法 间接请求接口验证
-        await store.dispatch("user/getUserInfo")
+        await Storage.dispatch("VaildToken")
         next()
       } catch (error) {
         localStorage.setItem("To_Url", to.fullPath)
         //清除
-        await store.commit("user/logout")
+        await history.clear()
         //
         if (Storage.getters.device == "weChat") {
           //微信
@@ -113,14 +125,18 @@ router.beforeEach(async (to, from, next) => {
   else {
     //无
     //判断是否在白名单中
-    // console.log(whiteList);
+    console.log("未登录");
     const isWhite = whiteList.findIndex(item => {
       return to.path.includes(item)
     })
-    if (isWhite) {
+  
+    if (isWhite!==-1) {
       //是 在白名单中 不需要登录
+      console.log("未登录且在白名单中",to.fullPath);
+
       next()
     } else {
+      console.log("未登录且不在白名单",to.fullPath);
       //否 不在 则需要跳转登录 记录当前url
       localStorage.setItem("To_Url", to.fullPath)
       if (Storage.getters.device == "weChat") {

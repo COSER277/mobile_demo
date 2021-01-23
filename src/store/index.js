@@ -19,6 +19,9 @@ Vue.use(Vuex);
             value
         }) {
             state[name] = value
+        },
+        VaildToken(){
+            console.log("验证");
         }
     },
     actions: {
