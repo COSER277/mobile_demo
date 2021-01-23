@@ -2,6 +2,7 @@ import Vue from 'vue'
 import 'vant/lib/index.css';
 import {
   Toast,
+  Button,
   List,
   Dialog,
   Stepper,
@@ -37,3 +38,4 @@ Vue.use(Toast)
   .use(TabbarItem)
   .use(Empty)
   .use(Icon)
+  .use(Button)
