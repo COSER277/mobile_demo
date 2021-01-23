@@ -1,6 +1,6 @@
 <template>
 	<div>
-		<van-tabs color="#1989fa">
+		<van-tabs color="#1989fa" sticky>
 			<van-tab v-for="cate in categories" :title="cate.name">内容 {{ cate }}</van-tab>
 		</van-tabs>
 	</div>
