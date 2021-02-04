@@ -20,6 +20,9 @@ export default {
 	},
 	methods: {
 		onChange(index) {}
-	}
+	},
+	mounted() {
+		console.log(this.$Api)
+	},
 }
 </script>

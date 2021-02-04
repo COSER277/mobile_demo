@@ -28,70 +28,70 @@ export default {
 		return {
 			tagName: '全部',
 			categories: [
-				{
-					name: '推荐',
-					params: '',
-					tags: [
-						{
-							name: '全部'
-						},
-						{
-							name: '日榜'
-						},
-						{
-							name: '月榜'
-						},
-						{
-							name: '年榜'
-						}
-					]
-				},
-				{
-					name: '后端',
-					params: '',
-					tags: [
-						{
-							name: '全部'
-						},
-						{
-							name: 'Java'
-						},
-						{
-							name: 'C#'
-						}
-					]
-				},
-				{
-					name: '前端',
-					params: '',
-					tags: [
-						{
-							name: '全部'
-						},
-						{
-							name: 'Javascript'
-						},
-						{
-							name: 'Vue.js'
-						}
-					]
-				},
-				{
-					name: 'Android',
-					params: ''
-				},
-				{
-					name: 'IOS',
-					params: ''
-				},
-				{
-					name: '开发工具',
-					params: ''
-				},
-				{
-					name: '代码人生',
-					icon: ''
-				}
+				// {
+				// 	name: '推荐',
+				// 	params: '',
+				// 	tags: [
+				// 		{
+				// 			name: '全部'
+				// 		},
+				// 		{
+				// 			name: '日榜'
+				// 		},
+				// 		{
+				// 			name: '月榜'
+				// 		},
+				// 		{
+				// 			name: '年榜'
+				// 		}
+				// 	]
+				// },
+				// {
+				// 	name: '后端',
+				// 	params: '',
+				// 	tags: [
+				// 		{
+				// 			name: '全部'
+				// 		},
+				// 		{
+				// 			name: 'Java'
+				// 		},
+				// 		{
+				// 			name: 'C#'
+				// 		}
+				// 	]
+				// },
+				// {
+				// 	name: '前端',
+				// 	params: '',
+				// 	tags: [
+				// 		{
+				// 			name: '全部'
+				// 		},
+				// 		{
+				// 			name: 'Javascript'
+				// 		},
+				// 		{
+				// 			name: 'Vue.js'
+				// 		}
+				// 	]
+				// },
+				// {
+				// 	name: 'Android',
+				// 	params: ''
+				// },
+				// {
+				// 	name: 'IOS',
+				// 	params: ''
+				// },
+				// {
+				// 	name: '开发工具',
+				// 	params: ''
+				// },
+				// {
+				// 	name: '代码人生',
+				// 	icon: ''
+				// }
 			]
 		}
 	},
@@ -104,7 +104,12 @@ export default {
 		select(tag) {
 			this.tagName = tag.name
 		}
-	}
+	},
+	mounted() {
+		this.$Api.Article.getCateAndTags().then(res=>{
+			this.categories=res.data
+		})
+	},
 }
 </script>
 

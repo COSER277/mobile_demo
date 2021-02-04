@@ -71,7 +71,7 @@ var instance = axios.create({
     timeout: 10000,
 })
 // 设置post请求头
-instance.default.headers.post(['Content-Type']) = 'application/x-www-form-urlencoded';
+// instance.default.headers.post(['Content-Type']) = 'application/x-www-form-urlencoded';
 
 /**
  * 请求拦截器
@@ -124,7 +124,8 @@ instance.interceptors.response.use(
 
 const base = {
 	product: 'https://xxxx111111.com/api/v1',
-	test: 'http://xxxxx22222.com/api'
+    test: 'http://xxxxx22222.com/api',
+    dev:"http://10.107.56.49:3000"
 }
 // 暴露实例对象
-export default {instance,base};
+export {instance,base};
